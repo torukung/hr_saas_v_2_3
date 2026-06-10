@@ -376,7 +376,7 @@ textarea.input{ resize:vertical; min-height:74px; }
 }
 .phone-screen{
   position:relative; background:var(--canvas); border-radius:44px; overflow:hidden;
-  height:780px; display:flex; flex-direction:column;
+  height:clamp(600px, calc(100vh - 158px), 780px); display:flex; flex-direction:column;
 }
 .statusbar{
   flex:none; display:flex; justify-content:space-between; align-items:center;
@@ -400,6 +400,7 @@ textarea.input{ resize:vertical; min-height:74px; }
 .app-head .back svg{ width:15px; height:15px; }
 
 .app-body{ flex:1; overflow-y:auto; padding:16px 16px 20px; display:flex; flex-direction:column; gap:12px; scrollbar-width:thin; }
+.app-body > *{ flex:0 0 auto; } /* scroll container: children must never flex-shrink (clock-hero has overflow:hidden → would collapse) */
 .app-body .card{ padding:16px; border-radius:15px; }
 .app-body .kpi{ padding:13px 15px; }
 .app-body .kpi .k-value{ font-size:24px; }
@@ -433,7 +434,7 @@ textarea.input{ resize:vertical; min-height:74px; }
 .clock-hero .ch-btn{
   border:0; border-radius:13px; background:rgba(255,255,255,.95); color:var(--acc-d);
   font-size:13px; font-weight:800; padding:11px 18px; display:flex; align-items:center; gap:8px;
-  box-shadow:0 6px 18px -8px rgba(0,0,0,.4); transition:transform var(--t);
+  box-shadow:0 6px 18px -8px rgba(0,0,0,.4); transition:transform var(--t); white-space:nowrap; flex:none;
 }
 .clock-hero .ch-btn:active{ transform:scale(.97); }
 .clock-hero .geo{ display:flex; align-items:center; gap:6px; font-size:10.5px; opacity:.85; margin-top:12px; font-weight:600; }

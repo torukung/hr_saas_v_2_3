@@ -131,14 +131,16 @@
     },
 
     requests() {
+      const mine = DATA.mine();
+      const n = (s) => String(mine.filter(r => r.status === s).length);
       return {
         title: "My requests", sub: "Leave, overtime, claims and corrections — one inbox, traceable IDs, every status visible.",
         actions: `<button class="btn" data-go="staff/web/request-new/Leave">${icon("plus")} New request</button>`,
         body: `
         <div class="grid cols-4">
-          ${kpi("Open", "2", "Awaiting approval")}
-          ${kpi("Approved", "2", "Last 30 days")}
-          ${kpi("Returned", "0", "Needs your edit")}
+          ${kpi("Open", n("pending"), "Awaiting approval")}
+          ${kpi("Approved", n("approved"), "Last 30 days")}
+          ${kpi("Returned", n("returned"), "Needs your edit")}
           ${kpi("Leave balance", "12 d", "Annual · accrues 1.25/mo")}
         </div>
         ${card("All requests", `
